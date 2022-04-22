@@ -16,9 +16,17 @@
 
 3. 分工
 - 每个人有所侧重，全部涉及
+- 侧重(待定) 4.28前:
+	- dd: 1, 2, 3, 7
+	- hxy: 6, 9, 往年赛题整理
+	- bxy: 4, 5, 8
+- 冲刺， 4.28之后
+	- 整理
+	- 赛题分析
 
 4. 资源
 - [Markdown Syntax](https://www.markdownguide.org/cheat-sheet/)
+
 ---
 5. 比赛
 - 选题
