@@ -1,0 +1,4 @@
+"/Users/xinyuanhe/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.75/CLion.app/Contents/bin/cmake/mac/bin/cmake" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=/Users/xinyuanhe/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/213.6461.75/CLion.app/Contents/bin/ninja/mac/ninja" -G Ninja /Users/xinyuanhe/Desktop/working/2021美赛/模型/【正式】模型-计算与模拟-计算机模拟-蒙特卡洛模拟【hxy】/integrap_cpp
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/xinyuanhe/Desktop/working/2021美赛/模型/【正式】模型-计算与模拟-计算机模拟-蒙特卡洛模拟【hxy】/integrap_cpp/cmake-build-debug
