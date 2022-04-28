@@ -40,4 +40,37 @@ def getTreeDepth(myTree):
             maxDepth = depth
     return maxDepth
 
+def plotMidText(centerPt, parentPt, txt):
+    xMid = (centerPt[0] + parentPt[0]) / 2.0
+    yMid = (centerPt[1] + parentPt[1]) / 2.0
+    createPlot.ax1.text(xMid, yMid, txt)
 
+def plotTree(myTree, parentPt, nodeTxt):
+    numLeafs = getNumLeafs(myTree)
+    #depth = getTreeDepth(myTree)
+    firstStr = list(myTree.keys())[0]
+    centerPt = (plotTree.xOff + (1.0 + float(numLeafs))/(2.0 * plotTree.totalW), plotTree.yOff)
+    plotMidText(centerPt, parentPt, nodeTxt)
+    plotNode(firstStr, centerPt, parentPt, decisionNode)
+    secondDict = myTree[firstStr]
+    plotTree.yOff = plotTree.yOff - 1.0/plotTree.totalD
+    for key in secondDict.keys():
+        if type(secondDict[key]).__name__ == 'dict':
+            plotTree(secondDict[key], centerPt, str(key))
+        else:
+            plotTree.xOff = plotTree.xOff + 1.0/plotTree.totalW
+            plotNode(secondDict[key], (plotTree.xOff, plotTree.yOff), centerPt, leafNode)
+            plotMidText((plotTree.xOff, plotTree.yOff), centerPt, str(key))
+    plotTree.yOff = plotTree.yOff + 1.0/plotTree.totalD
+
+def createPlot(tree):
+    fig = plt.figure(1, facecolor='white')
+    fig.clf()
+    axprops = dict(xticks=[], yticks=[])
+    createPlot.ax1 = plt.subplot(111, frameon=False, **axprops)
+    plotTree.totalW = float(getNumLeafs(tree))
+    plotTree.totalD = float(getTreeDepth(tree))
+    plotTree.xOff = -0.5/plotTree.totalW
+    plotTree.yOff = 1.0
+    plotTree(tree, (0.5, 1.0), '')
+    plt.show()

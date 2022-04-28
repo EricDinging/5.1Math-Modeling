@@ -1,6 +1,7 @@
 from math import log
 import operator
 import treePlotter
+import pickle
 
 def calcShannonEnt(dataset):
     n = len(dataset)
@@ -76,7 +77,35 @@ def createTree(dataSet, featLabel):
         myTree[bestFeatLabel][value] = createTree(splitDataSet(dataSet, bestFeat, value), subLabels)
     return myTree
 
+def classify(tree, featLabels, x):
+    firstStr = list(tree.keys())[0]
+    secondDict = tree[firstStr]
+    featIndex = featLabels.index(firstStr)
+    for key in secondDict.keys():
+        if key == x[featIndex]:
+            if type(secondDict[key]).__name__ == 'dict':
+                y = classify(secondDict[key], featLabels, x)
+            else:
+                y = secondDict[key]
+    return y
 
-dat, features = createDataset()
-myTree = createTree(dat, features)
-print(treePlotter.getNumLeafs(myTree))
+def storeTree(inputTree, filename):
+    fw = open(filename, 'wb')
+    pickle.dump(inputTree, fw)
+    fw.close()
+
+def grabTree(filename):
+    fr = open(filename,'rb')
+    return pickle.load(fr)
+
+
+# dat, featureLabels = createDataset()
+fr = open('lenses.txt')
+lenses = [inst.strip().split('\t') for inst in fr.readlines()]
+lensesLabels = ['age', 'prescript', 'astigmatic', 'tearRate']
+featureLabels = lensesLabels[:]
+myTree = createTree(lenses, lensesLabels)
+storeTree(myTree, 'classifier.txt')
+tree = grabTree('classifier.txt')
+print(classify(tree, featureLabels, ['pre', 'hyper', 'no', 'reduced', 'no']))
+treePlotter.createPlot(tree)
