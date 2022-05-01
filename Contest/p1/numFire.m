@@ -34,5 +34,4 @@ for i = index'
         num = num - maxcases + val;
     end
 end
-
-num
+disp(num);
