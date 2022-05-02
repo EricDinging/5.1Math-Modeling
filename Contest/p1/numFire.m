@@ -2,7 +2,7 @@ clear,clc;
 k = 27860;
 
 data = readtable('alarm.xlsx');
-machinenum = table2array(data(1:k,1));
+machineNum = table2array(data(1:k,1));
 loop = table2array(data(1:k,2));
 alarmNum = table2array(data(1:k,6));
 obj = string(table2cell(data(1:k,9)));
@@ -14,7 +14,7 @@ num = 0;
 for i = index'
     maxcases = 0;
     for j = find(index < i)'
-        if ~isempty(j) && strcmp(obj(index(j)), obj(i)) && machinenum(index(j)) == machinenum(i) && loop(index(j)) == loop(i)
+        if ~isempty(j) && strcmp(obj(index(j)), obj(i)) && machineNum(index(j)) == machineNum(i) && loop(index(j)) == loop(i)
             if result(index(j)) == case2
                 temp = 1;
             else
